@@ -10,9 +10,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -30,7 +27,6 @@ public class Customer extends User {
   @OneToMany(mappedBy = "customer")
   @JsonIgnore
   private List<Order> orders = new ArrayList<>();
-
 
 
   public Customer() {
@@ -59,7 +55,6 @@ public class Customer extends User {
   public void setOrders(List<Order> orders) {
     this.orders = orders;
   }
-
 
 
   // add an order

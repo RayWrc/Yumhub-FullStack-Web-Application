@@ -2,7 +2,6 @@ import React from 'react';
 
 class OwnerMenu extends React.Component {
 
-
     render() {
         return (
             <li className="list-group-item list-group-item-action flex-column align-items-start">

@@ -14,7 +14,8 @@ import {CustomerReducer} from "./Reducers/CustomerReducer";
 let rootReducer = combineReducers({
                                       restaurants: RestaurantListReducer,
                                       users: UserReducer,
-                                      customer: CustomerReducer});
+                                      customer: CustomerReducer
+                                  });
 const store = createStore(rootReducer);
 ReactDOM.render(
     <Provider store={store}>

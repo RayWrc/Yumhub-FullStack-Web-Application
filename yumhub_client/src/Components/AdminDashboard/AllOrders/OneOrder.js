@@ -18,7 +18,6 @@ class OneRestaurant extends React.Component {
         }
     }
 
-
     changeState() {
         if (this.state.showId === 1) {
             this.setState({
@@ -36,7 +35,8 @@ class OneRestaurant extends React.Component {
 
     updateOrder() {
 
-        this.adminService.adminUpdateOrder(this.state.note, this.props.order.id, this.state.orderStatus).then(() => {
+        this.adminService.adminUpdateOrder(this.state.note, this.props.order.id,
+                                           this.state.orderStatus).then(() => {
             alert("This order has been updated");
             this.props.findAllOrders();
         })

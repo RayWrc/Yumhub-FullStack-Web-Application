@@ -1,6 +1,7 @@
 package edu.northeastern.zry.models;
 
-import javax.persistence.DiscriminatorColumn;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,99 +10,87 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Item {
-	
-	@Id
-	@GeneratedValue(strategy= GenerationType.IDENTITY)
-	private int id;
-	private int quantity;
-	private Double itemPrice;
-	private String dishName;
-	
-	
-	@ManyToOne
-	@JsonIgnore
-	private Dish dish;
-	
 
-	
-	public Item() {
-		quantity = 1;
-		
-	}
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private int id;
+  private int quantity;
+  private Double itemPrice;
+  private String dishName;
 
 
-
-	public Item( int quantity, Double price, Dish dish) {
-		super();
-		this.quantity = quantity;
-		this.itemPrice = price;
-		this.dish = dish;
-	}
+  @ManyToOne
+  @JsonIgnore
+  private Dish dish;
 
 
+  public Item() {
+    quantity = 1;
 
-	public int getId() {
-		return id;
-	}
-
-
-
-	public void setId(int id) {
-		this.id = id;
-	}
+  }
 
 
-
-	public int getQuantity() {
-		return quantity;
-	}
-
-
-
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
+  public Item(int quantity, Double price, Dish dish) {
+    super();
+    this.quantity = quantity;
+    this.itemPrice = price;
+    this.dish = dish;
+  }
 
 
-
-	public Double getItemPrice() {
-		return itemPrice;
-	}
-
+  public int getId() {
+    return id;
+  }
 
 
-	public void setItemPrice(Double price) {
-		this.itemPrice = price;
-	}
+  public void setId(int id) {
+    this.id = id;
+  }
 
 
-
-	public Dish getDish() {
-		return dish;
-	}
-
+  public int getQuantity() {
+    return quantity;
+  }
 
 
-	public void setDish(Dish dish) {
-		this.dish = dish;
-	}
+  public void setQuantity(int quantity) {
+    this.quantity = quantity;
+  }
 
-	
-	 public String getItemType() {
-		    return "";
-	
-	 }
 
-	public String getDishName() {
-		return dishName;
-	}
+  public Double getItemPrice() {
+    return itemPrice;
+  }
 
-	public void setDishName(String dishName) {
-		this.dishName = dishName;
-	}
+
+  public void setItemPrice(Double price) {
+    this.itemPrice = price;
+  }
+
+
+  public Dish getDish() {
+    return dish;
+  }
+
+
+  public void setDish(Dish dish) {
+    this.dish = dish;
+  }
+
+
+  public String getItemType() {
+    return "";
+
+  }
+
+  public String getDishName() {
+    return dishName;
+  }
+
+  public void setDishName(String dishName) {
+    this.dishName = dishName;
+  }
 }

@@ -4,6 +4,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import edu.northeastern.zry.models.Item;
 
-public interface ItemRepository extends CrudRepository <Item, Integer> {
+public interface ItemRepository extends CrudRepository<Item, Integer> {
 
 }

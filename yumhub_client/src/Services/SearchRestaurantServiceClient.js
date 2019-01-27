@@ -1,8 +1,12 @@
 let _singleton = Symbol();
 
-const localURL = 'http://localhost:8080';
+//const localURL = 'http://localhost:8080';
+const localURL = 'http://yumhub-server.us-east-1.elasticbeanstalk.com/';
 const findRestaurantsByCityURL = '/api/restaurant/city';
+
+
 const yelpBusinessDetailURL = '/api/restaurant/detail/Id';
+
 const restaurantMenuURL = '/api/restaurant/restaurantId/dishes';
 
 const allOrdersForRestaurantURL = '/api/restaurant/resId/order';
@@ -12,7 +16,6 @@ const deleteRestaurantURL = '/api/restaurant/resId';
 
 const createResForOwnerURL = '/api/admin/restaurant/owner/ownerName';
 const adminUpdateResURL = '/api/admin/restaurant/resId';
-
 
 class SearchRestaurantService {
     constructor(singletonToken) {
@@ -35,25 +38,23 @@ class SearchRestaurantService {
             });
     }
 
-    findRestaurantDetailByYelpId(yelpId){
-        return fetch(localURL + yelpBusinessDetailURL.replace('Id', yelpId))
+    findRestaurantDetailByYelpId(id) {
+        return fetch(localURL + yelpBusinessDetailURL.replace('Id', id))
             .then((response) => {
                 return response.json();
             })
 
-
     }
 
-    findRestaurantMenuById(Id){
+    findRestaurantMenuById(Id) {
         return fetch(localURL + restaurantMenuURL.replace('restaurantId', Id))
             .then((response) => {
                 return response.json();
             })
 
-
     }
 
-    findOrdersForRestaurant(resId){
+    findOrdersForRestaurant(resId) {
         return fetch(localURL + allOrdersForRestaurantURL.replace('resId', resId))
             .then((response) => {
                 return response.json();
@@ -61,14 +62,14 @@ class SearchRestaurantService {
 
     }
 
-    findAllRestaurants(){
+    findAllRestaurants() {
         return fetch(localURL + allRestaurantsURL)
             .then(function (response) {
                 return response.json();
             });
     }
 
-    findOwnerForRestaurant(resId){
+    findOwnerForRestaurant(resId) {
         let promise = fetch(localURL + OwnerForRestaurantURL.replace('resId', resId));
 
         return promise.then(function (value) {
@@ -82,14 +83,14 @@ class SearchRestaurantService {
         })
     }
 
-    deleteRestaurantById(resId){
+    deleteRestaurantById(resId) {
         return fetch(localURL + deleteRestaurantURL.replace('resId', resId),
             {
                 method: 'delete'
             })
     }
 
-    createRestaurantForOwner(restaurant, username){
+    createRestaurantForOwner(restaurant, username) {
         let promise = fetch(localURL + createResForOwnerURL.replace('ownerName', username),
             {
                 method: 'post',
@@ -111,7 +112,7 @@ class SearchRestaurantService {
 
     }
 
-    adminUpdateRes(restaurant, resId){
+    adminUpdateRes(restaurant, resId) {
         return fetch(localURL + adminUpdateResURL.replace('resId', resId),
             {
                 method: 'put',
@@ -130,7 +131,6 @@ class SearchRestaurantService {
 
         });
     }
-
 
 }
 

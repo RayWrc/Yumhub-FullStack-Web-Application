@@ -39,7 +39,6 @@ class AllOrders extends Component {
         return allOrders;
     }
 
-
     render() {
         //console.log(this.state.users);
         return (

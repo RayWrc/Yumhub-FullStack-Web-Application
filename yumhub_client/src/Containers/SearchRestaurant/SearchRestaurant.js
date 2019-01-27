@@ -4,7 +4,6 @@ import * as constants from '../../Constants/Users';
 import {connect} from "react-redux";
 import AnonymousUserSearchHeading from '../../Components/Restaurants/AnonymousRestaurant/AnonymousUserSearchHeading';
 import CustomerUserSearchHeading from '../../Components/Restaurants/CustomerRestaurant/CustomerUserSearchHeading';
-import {OwnerDashBoardContainer} from "../Owner/OwnerDashBoard";
 
 class SearchRestaurant extends Component {
     constructor() {
@@ -22,18 +21,19 @@ class SearchRestaurant extends Component {
     componentDidMount() {
         this.props.findUser();
     }
-    componentDidUpdate(){
-        if(this.props.userType === constants.OWNER_USER ){
+
+    componentDidUpdate() {
+        if (this.props.userType === constants.OWNER_USER) {
             //console.log(1);
             let path = '/dashboard/owner/username';
             this.props.history.push(path.replace('username', this.props.currentUser.username));
         }
-        if(this.props.userType === constants.DELIVERER_USER){
+        if (this.props.userType === constants.DELIVERER_USER) {
             //console.log(1);
             let path = '/dashboard/deliverer/username';
             this.props.history.push(path.replace('username', this.props.currentUser.username));
         }
-        if(this.props.userType === constants.ADMIN_USER){
+        if (this.props.userType === constants.ADMIN_USER) {
             //console.log(1);
             let path = '/dashboard/admin/username';
             this.props.history.push(path.replace('username', this.props.currentUser.username));
@@ -58,7 +58,7 @@ class SearchRestaurant extends Component {
     }
 
     render() {
-      //  console.log(this.props.userType);
+        //  console.log(this.props.userType);
         return (
             <div className="container-fluid">
                 {

@@ -6,12 +6,12 @@ const userService = UserService.instance;
 export const findUser = (dispatch) => {
     userService.findCurrentUser()
         .then((user) => {
-           // console.log(user);
-            if(user === constants.ANONYMOUS_USER){
+            // console.log(user);
+            if (user === constants.ANONYMOUS_USER) {
                 dispatch({
                              type: constants.ANONYMOUS_USER
                          });
-            }else{
+            } else {
                 dispatch({
                              type: user.userType,
                              currentUser: user
@@ -19,7 +19,6 @@ export const findUser = (dispatch) => {
             }
         });
 };
-
 
 export const logOut = (dispatch) => {
     userService.userLogOut()

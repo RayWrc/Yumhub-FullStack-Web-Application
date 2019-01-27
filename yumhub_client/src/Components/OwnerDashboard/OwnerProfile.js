@@ -45,14 +45,14 @@ class OwnerProfile extends Component {
             phone: this.state.phone,
         };
         console.log(user);
-        this.userService.profileUpdate(user).then(()=>{
+        this.userService.profileUpdate(user).then(() => {
             alert("Profile has been updated")
         })
 
     }
 
     render() {
-       // console.log(this.state.userType);
+        // console.log(this.state.userType);
         return (
             <div className="container-fluid">
                 <h2 id="title">

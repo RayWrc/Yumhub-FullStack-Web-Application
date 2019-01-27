@@ -1,5 +1,6 @@
 package edu.northeastern.zry.services;
 
+import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -30,6 +32,9 @@ public class RestaurantService {
   @Autowired
   OwnerRepository ownerRepo;
 
+  @Autowired
+  YelpAPIService yelpAPIService;
+
 
   @GetMapping("/api/restaurant")
   public List<Restaurant> findAllRestaurants() {
@@ -45,8 +50,13 @@ public class RestaurantService {
 
 
   @GetMapping("/api/restaurant/{city}")
-  public List<Restaurant> findRestaurantByCity(@PathVariable("city") String city) {
-    return restaurantRepository.findRestaurantByCity(city);
+  public List<Restaurant> findRestaurantByCity(@PathVariable("city") String city) throws IOException, JSONException {
+    List<Restaurant> data = restaurantRepository.findRestaurantByCity(city);
+    if (data.size() != 0) {
+      return data;
+    } else {
+      return (List<Restaurant>) yelpAPIService.findRelativeBusinessesByCity(city);
+    }
   }
 
   @GetMapping("/api/restaurant/{resId}/owner")
@@ -103,10 +113,19 @@ public class RestaurantService {
   }
 
   @GetMapping("/api/restaurant/detail/{Id}")
-  public Restaurant findRestaurantByYelpId(@PathVariable("Id") int yelpId) {
+  public Restaurant findRestaurantByYelpId(@PathVariable("Id") int id) throws IOException, JSONException {
 
-    Optional<Restaurant> data = restaurantRepository.findById(yelpId);
-    return data.orElse(null);
+    Optional<Restaurant> data = restaurantRepository.findById(id);
+    if (data.isPresent()) {
+      Restaurant existedRestaurant = data.get();
+      if (existedRestaurant.getDescriptionPictures().size() != 0) {
+        return existedRestaurant;
+      } else {
+        return yelpAPIService.findRestaurantDetailByYelpId(existedRestaurant.getYelpId());
+      }
+    } else {
+      return null;
+    }
   }
 
   @GetMapping("/api/restaurant/owner/{ownerId}")

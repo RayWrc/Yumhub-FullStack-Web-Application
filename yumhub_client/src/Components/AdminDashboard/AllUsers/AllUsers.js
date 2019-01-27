@@ -13,7 +13,7 @@ class AllUsers extends Component {
             users: [],
             username: "",
             userType: constants.CUSTOMER_USER,
-            password:""
+            password: ""
         };
     }
 
@@ -21,9 +21,7 @@ class AllUsers extends Component {
         this.findAllUsers();
     }
 
-
-
-    findAllUsers(){
+    findAllUsers() {
         this.userService.findAllUsers().then((users) => {
             this.setState({
                               users: users,
@@ -45,14 +43,14 @@ class AllUsers extends Component {
         return allUsers;
     }
 
-    createUser(){
+    createUser() {
         let user = {
             username: this.state.username,
             userType: this.state.userType,
             password: this.state.password
         };
         console.log(user);
-        this.userService.adminCreateUser(user).then(()=>{
+        this.userService.adminCreateUser(user).then(() => {
             this.findAllUsers();
         })
     }
@@ -89,7 +87,7 @@ class AllUsers extends Component {
                         <th>
                             <select onChange={(event) => {
                                 this.setState({
-                                    userType: event.target.value
+                                                  userType: event.target.value
                                               })
                             }}
                                     className="custom-select-sm  wbdv-btn-right-margin form-control"

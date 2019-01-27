@@ -30,7 +30,6 @@ class HeadingSearching extends Component {
         } else {
             // BrowserRouter.push(this.state.path.replace('cityName', this.state.cityName));
 
-
             this.props.props.history.push(this.state.path.replace('cityName', this.state.cityName));
 
         }
@@ -42,7 +41,7 @@ class HeadingSearching extends Component {
                       });
     }
 
-    logOut(){
+    logOut() {
         this.props.logOut();
         this.props.props.history.push('/');
     }

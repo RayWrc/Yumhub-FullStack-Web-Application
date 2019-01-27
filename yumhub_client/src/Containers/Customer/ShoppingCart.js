@@ -20,13 +20,13 @@ class ShoppingCart extends Component {
 
     componentDidMount() {
         this.props.updateShoppingCart(this.props.shoppingCartId);
-        if(this.props.shoppingCartItems.length !== 0){
+        if (this.props.shoppingCartItems.length !== 0) {
             this.getTotalPrice();
         }
     }
 
     componentDidUpdate() {
-        if(this.props.shoppingCartItems.length !== 0){
+        if (this.props.shoppingCartItems.length !== 0) {
             this.getTotalPrice();
         }
     }
@@ -66,7 +66,7 @@ class ShoppingCart extends Component {
     getTotalPrice() {
         this.customerService.getTotalPriceForShoppingCart(this.props.shoppingCartId)
             .then((shoppingCart) => {
-                if(this.state.totalPrice !== shoppingCart.totalPrice){
+                if (this.state.totalPrice !== shoppingCart.totalPrice) {
                     this.setState({
                                       totalPrice: shoppingCart.totalPrice
                                   })
@@ -84,7 +84,7 @@ class ShoppingCart extends Component {
     }
 
     render() {
-       // console.log(this.props.shoppingCartItems);
+        // console.log(this.props.shoppingCartItems);
         return (
             <div>
                 {this.props.shoppingCartItems.length !== 0 &&

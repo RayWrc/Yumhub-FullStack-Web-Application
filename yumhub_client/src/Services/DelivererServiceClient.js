@@ -1,9 +1,9 @@
 let _singleton = Symbol();
 
-const localURL = 'http://localhost:8080';
+//const localURL = 'http://localhost:8080';
+const localURL = 'http://yumhub-server.us-east-1.elasticbeanstalk.com/';
 const allOrdersForDelivererURL = '/api/deliverer/dId/order';
 const confirmURL = '/api/deliverer/dId/order/orderId/confirm';
-
 
 class DelivererService {
     constructor(singletonToken) {
@@ -19,7 +19,7 @@ class DelivererService {
         return this[_singleton]
     }
 
-    findAllOrdersForDeliverer(dId){
+    findAllOrdersForDeliverer(dId) {
         return fetch(localURL + allOrdersForDelivererURL.replace('dId', dId))
             .then(function (response) {
                 return response.json();
@@ -27,7 +27,7 @@ class DelivererService {
 
     }
 
-    confirmDelivery(orderId, userId){
+    confirmDelivery(orderId, userId) {
         return fetch(localURL + confirmURL.replace('dId', userId).replace('orderId', orderId),
             {
                 method: 'put',
@@ -44,8 +44,6 @@ class DelivererService {
             })
         });
     }
-
-
 
 }
 

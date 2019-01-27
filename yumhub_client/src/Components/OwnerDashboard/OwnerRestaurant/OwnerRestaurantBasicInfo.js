@@ -35,10 +35,10 @@ class OwnerRestaurantBasicInfo extends Component {
             })
             .then(() => {
                 this.ownerService.findRestaurantForOwner(this.state.userId).then((restaurant) => {
-                    if(restaurant !== null){
+                    if (restaurant !== null) {
                         this.setState({
                                           restaurantId: restaurant.id,
-                            restaurant: restaurant,
+                                          restaurant: restaurant,
                                           restaurantName: restaurant.name,
                                           restaurantAddress: restaurant.address,
                                           restaurantCity: restaurant.city,
@@ -50,9 +50,9 @@ class OwnerRestaurantBasicInfo extends Component {
                                           restaurantPrice: restaurant.price,
                                           coverPhoto: restaurant.photoLink
                                       })
-                    }else{
+                    } else {
                         this.setState({
-                            restaurant: null
+                                          restaurant: null
                                       })
                     }
                 })
@@ -78,7 +78,7 @@ class OwnerRestaurantBasicInfo extends Component {
 
     }
 
-    createRestaurant(){
+    createRestaurant() {
         let restaurant = {
             name: this.state.restaurantName,
             cuisineType: this.state.restaurantCuisine,
@@ -93,7 +93,7 @@ class OwnerRestaurantBasicInfo extends Component {
         this.ownerService.createRestaurant(restaurant, this.state.userId).then(() => {
             alert("Restaurant has been created");
             this.ownerService.findRestaurantForOwner(this.state.userId).then((restaurant) => {
-                if(restaurant !== null){
+                if (restaurant !== null) {
                     this.setState({
                                       restaurantId: restaurant.id,
                                       restaurant: restaurant,
@@ -108,7 +108,7 @@ class OwnerRestaurantBasicInfo extends Component {
                                       restaurantPrice: restaurant.price,
                                       coverPhoto: restaurant.photoLink
                                   })
-                }else{
+                } else {
                     this.setState({
                                       restaurant: null
                                   })
@@ -170,7 +170,8 @@ class OwnerRestaurantBasicInfo extends Component {
                                 {coverPhoto: event.target.value})}
                                    defaultValue={this.state.coverPhoto} type="text"
                                    className="form-control"
-                                   id="coverPhoto" placeholder="Please Provide the link to that photo"/>
+                                   id="coverPhoto"
+                                   placeholder="Please Provide the link to that photo"/>
                         </div>
                     </div>
                     <div className="form-group row">
@@ -251,7 +252,8 @@ class OwnerRestaurantBasicInfo extends Component {
                 {
                     this.state.restaurant === null &&
                     <div className="float-right">
-                        <button onClick={this.createRestaurant} className="btn btn-primary btn-success">
+                        <button onClick={this.createRestaurant}
+                                className="btn btn-primary btn-success">
                             Create Restaurant
                         </button>
                     </div>

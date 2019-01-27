@@ -16,7 +16,6 @@ import edu.northeastern.zry.models.Order;
 import edu.northeastern.zry.models.OrderItem;
 import edu.northeastern.zry.models.OrderStatus;
 import edu.northeastern.zry.models.Restaurant;
-import edu.northeastern.zry.models.ShoppingCart;
 import edu.northeastern.zry.models.ShoppingCartItem;
 import edu.northeastern.zry.repositories.CustomerRepository;
 import edu.northeastern.zry.repositories.OrderItemRepository;
@@ -41,18 +40,18 @@ public class OrderItemService {
 
   @PostMapping("/api/shoppingCart/{shoppingCartId}")
   public void placeOrder(@PathVariable("shoppingCartId") int shoppingCartId,
-  @RequestBody String note){
+                         @RequestBody String note) {
     List<ShoppingCartItem> thisCartItems = new ArrayList<>();
     List<ShoppingCartItem> allCartItems = (List<ShoppingCartItem>) shoppingCartItemRepository.findAll();
-    for(ShoppingCartItem item : allCartItems){
-      if(item.getCart().getId() == shoppingCartId){
+    for (ShoppingCartItem item : allCartItems) {
+      if (item.getCart().getId() == shoppingCartId) {
         thisCartItems.add(item);
       }
     }
     Restaurant orderRestaurant = thisCartItems.get(0).getDish().getRestaurant();
     Order newOrder = orderRepository.save(new Order());
     Optional<Customer> customer = customerRepository.findById(shoppingCartId);
-    if(customer.isPresent()){
+    if (customer.isPresent()) {
       Customer existedCustomer = customer.get();
       // new Order
       newOrder.setCustomer(existedCustomer);
@@ -62,7 +61,7 @@ public class OrderItemService {
       orderRepository.save(newOrder);
       // new OrderItems
       List<OrderItem> orderItems = new ArrayList<>();
-      for(ShoppingCartItem item : thisCartItems){
+      for (ShoppingCartItem item : thisCartItems) {
         OrderItem newOrderItem = new OrderItem();
         newOrderItem.setOrder(newOrder);
         newOrderItem.setDish(item.getDish());

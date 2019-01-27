@@ -98,7 +98,7 @@ class RestaurantDetail extends Component {
     }
 
     render() {
-        console.log(this.state.restaurantMenu);
+        console.log(this.state.restaurant);
         if (this.state.restaurant !== null) {
             return (
                 <div className="container-fluid">

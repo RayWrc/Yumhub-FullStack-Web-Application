@@ -8,7 +8,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,170 +16,152 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
-@Table(name ="`order`")
+@Table(name = "`order`")
 public class Order {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-	private Date created;
-	private String note;
-	
-	@Enumerated(EnumType.STRING)
-	private OrderStatus status;
-	
-	
-	@ManyToOne
 
-	private Deliverer deliver;
-	
-	@OneToOne(mappedBy="order", cascade = CascadeType.ALL, orphanRemoval = true)
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private int id;
+  private Date created;
+  private String note;
 
-	private Review review;
-	
-	@ManyToOne
-
-	private Customer customer;
-	
-	@ManyToOne
-
-	private Restaurant restaurant;
-	
-	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<OrderItem> orderItems = new ArrayList<>();
-	
-	
-	
+  @Enumerated(EnumType.STRING)
+  private OrderStatus status;
 
 
-	public Order() {
-		created = new Date();
-		
-	}
+  @ManyToOne
+
+  private Deliverer deliver;
+
+  @OneToOne(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+
+  private Review review;
+
+  @ManyToOne
+
+  private Customer customer;
+
+  @ManyToOne
+
+  private Restaurant restaurant;
+
+  @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+  private List<OrderItem> orderItems = new ArrayList<>();
 
 
-	public int getId() {
-		return id;
-	}
+  public Order() {
+    created = new Date();
+
+  }
 
 
-	public void setId(int id) {
-		this.id = id;
-	}
+  public int getId() {
+    return id;
+  }
 
 
-	public Date getCreated() {
-		return created;
-	}
+  public void setId(int id) {
+    this.id = id;
+  }
 
 
-	public void setCreated(Date created) {
-		this.created = created;
-	}
+  public Date getCreated() {
+    return created;
+  }
 
 
-	public String getNote() {
-		return note;
-	}
+  public void setCreated(Date created) {
+    this.created = created;
+  }
 
 
-	public void setNote(String note) {
-		this.note = note;
-	}
+  public String getNote() {
+    return note;
+  }
 
 
-	public OrderStatus getStatus() {
-		return status;
-	}
+  public void setNote(String note) {
+    this.note = note;
+  }
 
 
-	public void setStatus(OrderStatus status) {
-		this.status = status;
-	}
+  public OrderStatus getStatus() {
+    return status;
+  }
 
 
-	public Deliverer getDeliver() {
-		return deliver;
-	}
-
-	public void setDeliver(Deliverer deliver) {
-		this.deliver = deliver;
-
-	}
-	
-	
-	
-	
-
-	
-	public Customer getCustomer() {
-		return customer;
-	}
+  public void setStatus(OrderStatus status) {
+    this.status = status;
+  }
 
 
-	// set the customer to the customer
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
-	
-	
+  public Deliverer getDeliver() {
+    return deliver;
+  }
+
+  public void setDeliver(Deliverer deliver) {
+    this.deliver = deliver;
+
+  }
 
 
-	
-	public Review getReview() {
-		return review;
-	}
+  public Customer getCustomer() {
+    return customer;
+  }
 
 
-	// set the review to the order
-	public void setReviews(Review review) {
-		this.review = review;
-		review.setOrder(this);
-		
-	}
-	
-	// remove the review from the order
-	public void removeReview() {
-		this.review.setOrder(null);
-		this.review = null;
-	}
+  // set the customer to the customer
+  public void setCustomer(Customer customer) {
+    this.customer = customer;
+  }
 
 
-	public List<OrderItem> getOrderItems() {
-		return orderItems;
-	}
+  public Review getReview() {
+    return review;
+  }
 
 
-	 // set an orderItem to an order
-	public void setOrderItems(OrderItem orderItem) {
-		this.orderItems.add(orderItem);
-		if(orderItem.getOrder()!=this) {
-			orderItem.setOrder(this);
-		}
-	}
+  // set the review to the order
+  public void setReviews(Review review) {
+    this.review = review;
+    review.setOrder(this);
+
+  }
+
+  // remove the review from the order
+  public void removeReview() {
+    this.review.setOrder(null);
+    this.review = null;
+  }
 
 
-	public Restaurant getRestaurant() {
-		return restaurant;
-	}
+  public List<OrderItem> getOrderItems() {
+    return orderItems;
+  }
 
 
-	// set the restaurant to the order
-	public void setRestaurant(Restaurant restaurant) {
-		this.restaurant = restaurant;
-		if(!restaurant.getOrders().contains(this)) {
-			restaurant.getOrders().add(this);
-		}
-	}
-	
-	
-	
-	
-	
-	
+  // set an orderItem to an order
+  public void setOrderItems(OrderItem orderItem) {
+    this.orderItems.add(orderItem);
+    if (orderItem.getOrder() != this) {
+      orderItem.setOrder(this);
+    }
+  }
 
-	
+
+  public Restaurant getRestaurant() {
+    return restaurant;
+  }
+
+
+  // set the restaurant to the order
+  public void setRestaurant(Restaurant restaurant) {
+    this.restaurant = restaurant;
+    if (!restaurant.getOrders().contains(this)) {
+      restaurant.getOrders().add(this);
+    }
+  }
+
+
 }

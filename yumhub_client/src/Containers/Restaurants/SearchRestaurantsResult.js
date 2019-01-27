@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import RestaurantCard from '../../Components/Restaurants/RestaurantCard'
 import * as constants from "../../Constants/RestaurantList"
 import * as actions from "../../Actions/SearchRestaurantsAction";
-import {SearchRestaurantContainer} from '../SearchRestaurant/SearchRestaurant'
 import {connect} from "react-redux";
 import {HeadingSearchingContainer} from "../HeadingSearching";
 
@@ -24,7 +23,7 @@ class SearchRestaurantsResult extends Component {
 
     componentDidUpdate(prevProps) {
         if (this.props.match.params.cityName !== prevProps.match.params.cityName) {
-           // console.log(this.props);
+            // console.log(this.props);
             this.props.findRestaurantsByCity(this.props.match.params.cityName);
         }
     }
@@ -35,7 +34,7 @@ class SearchRestaurantsResult extends Component {
         if (this.props.restaurantList != null) {
             restaurantCards = this.props.restaurantList.map(
                 (restaurant) => {
-                    return <RestaurantCard key = {restaurant.yelpId}
+                    return <RestaurantCard key={restaurant.yelpId}
                                            res={restaurant}
                                            selectRestaurant={this.selectRestaurant}/>
                 });
@@ -45,7 +44,7 @@ class SearchRestaurantsResult extends Component {
 
     }
 
-    selectRestaurant(Id){
+    selectRestaurant(Id) {
         this.props.history.push('/restaurantDetail/' + Id);
     }
 
@@ -56,7 +55,7 @@ class SearchRestaurantsResult extends Component {
                 <div className="float-right">
                     <ul className="list-inline">
                         <li className="list-inline-item">
-                           Sort:
+                            Sort:
                         </li>
                         <li className="list-inline-item">
                             <select onChange={(event) => {
@@ -65,8 +64,10 @@ class SearchRestaurantsResult extends Component {
                             }} className="custom-select-sm  wbdv-btn-right-margin"
                                     value={this.props.restaurantListSort}>
                                 <option value={constants.DEFAULT}>Default</option>
-                                <option value={constants.SORT_BY_RATING}>Rating: High to Low</option>
-                                <option value={constants.SORT_BY_DISTANCE}>Distance: Near to Far</option>
+                                <option value={constants.SORT_BY_RATING}>Rating: High to Low
+                                </option>
+                                <option value={constants.SORT_BY_DISTANCE}>Distance: Near to Far
+                                </option>
                             </select>
                         </li>
                     </ul>

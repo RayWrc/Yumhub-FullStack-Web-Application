@@ -2,9 +2,7 @@ import React from 'react';
 import DelivererOrderItemDetail from "./DelivererOrderItemDetail";
 
 class DelivererAssignedOrderItem extends React.Component {
-    constructor(props) {
-        super(props);
-    }
+
 
     orderItems() {
         let orderItems = null;
@@ -32,7 +30,6 @@ class DelivererAssignedOrderItem extends React.Component {
 
         return totalPrice;
     }
-
 
     render() {
         return (

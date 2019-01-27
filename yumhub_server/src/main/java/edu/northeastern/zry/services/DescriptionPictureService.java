@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.Optional;
 
 import edu.northeastern.zry.models.DescriptionPicture;
-import edu.northeastern.zry.models.Dish;
 import edu.northeastern.zry.models.Restaurant;
 import edu.northeastern.zry.repositories.DescriptionPictureRepository;
 import edu.northeastern.zry.repositories.RestaurantRepository;
@@ -31,25 +30,26 @@ public class DescriptionPictureService {
   DescriptionPictureRepository descriptionPictureRepository;
 
   @GetMapping("/api/res/{resId}/pic")
-  public List<DescriptionPicture> findAllPicsForRes(@PathVariable("resId") int resId){
+  public List<DescriptionPicture> findAllPicsForRes(@PathVariable("resId") int resId) {
     List<DescriptionPicture> allPics = (List<DescriptionPicture>) descriptionPictureRepository.findAll();
     List<DescriptionPicture> resultPics = new ArrayList<>();
-    for(DescriptionPicture pic:allPics){
-      if(pic.getRestaurantPicture().getId() == resId){
+    for (DescriptionPicture pic : allPics) {
+      if (pic.getRestaurantPicture().getId() == resId) {
         resultPics.add(pic);
       }
     }
     return resultPics;
 
   }
+
   @PostMapping("/api/restaurant/{resId}/link")
   public DescriptionPicture createDishForRestaurant(@PathVariable("resId") int restaurantId,
                                                     @RequestBody DescriptionPicture link) {
     Optional<Restaurant> data = restaurantRepository.findById(restaurantId);
 
-    if(!data.isPresent()) {
+    if (!data.isPresent()) {
       return null;
-    }else {
+    } else {
       Restaurant rest = data.get();
       link.setRestaurantPicture(rest);
       return descriptionPictureRepository.save(link);
@@ -58,11 +58,11 @@ public class DescriptionPictureService {
 
   @PutMapping("/api/picLink/{linkId}")
   public DescriptionPicture updateDishForRestaurant(@PathVariable("linkId") int linkId,
-                                      @RequestBody DescriptionPicture newLink) {
+                                                    @RequestBody DescriptionPicture newLink) {
     Optional<DescriptionPicture> data = descriptionPictureRepository.findById(linkId);
     if (data.isPresent()) {
       DescriptionPicture existedPic = data.get();
-     existedPic.setLink(newLink.getLink());
+      existedPic.setLink(newLink.getLink());
       return descriptionPictureRepository.save(existedPic);
     }
     return null;

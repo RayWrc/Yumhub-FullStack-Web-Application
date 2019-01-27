@@ -1,10 +1,8 @@
 import React, {Component} from 'react';
-import * as constants from "../../Constants/Users";
 import UserService from '../../Services/UserServiceClient';
 import {connect} from "react-redux";
 import * as actions from "../../Actions/UserAction";
 import {Route} from "react-router-dom";
-import DelivererDashBoardList from "../../Components/DelivererDashboard/DelivererDashBoardList";
 import AdminDashBoardOptionDetail from "./AdminDashBoardOptionDetail";
 import AdminDashBoardList from "../../Components/AdminDashboard/AdminDashBoardList";
 

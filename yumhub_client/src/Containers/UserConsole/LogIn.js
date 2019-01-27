@@ -28,8 +28,12 @@ class LogIn extends Component {
             password: this.state.password
         };
 
-        this.userService.userLogin(user).then(() => {
-            this.props.history.push('/');
+        this.userService.userLogin(user).then((response) => {
+            if (response === null) {
+                alert("Please check your username or password again.");
+            } else {
+                this.props.history.push('/');
+            }
         });
 
     }

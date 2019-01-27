@@ -250,7 +250,8 @@ class OneUser extends React.Component {
                                             <input
                                                 onChange={(event) => this.setState(
                                                     {ratingAmount: Number(event.target.value)})}
-                                                defaultValue={this.props.user.ratingAmount} type="text"
+                                                defaultValue={this.props.user.ratingAmount}
+                                                type="text"
                                                 className="form-control"
                                                 id="amount"/>
                                         </div>

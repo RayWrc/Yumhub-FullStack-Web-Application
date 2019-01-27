@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import * as constants from "../../Constants/Users";
 import UserService from '../../Services/UserServiceClient';
 import CustomerDashBoardList from '../../Components/CustomerDashboard/CustomerDashBoardList';
 import DashBoardOptionDetail from './DashBoardOptionDetail';
@@ -13,7 +12,6 @@ class CustomerDashBoard extends Component {
         super(props);
         this.userService = UserService.instance;
     }
-
 
     render() {
         console.log(this.props.currentUser);

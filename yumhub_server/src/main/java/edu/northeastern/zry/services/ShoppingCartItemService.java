@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,26 +43,26 @@ public class ShoppingCartItemService {
 
   @PostMapping("/api/shoppingCart/{shoppingCartId}/dish/{dishId}")
   public ShoppingCartItem addDishToShoppingCart(
-          @PathVariable("shoppingCartId") int shoppingCartId, @PathVariable("dishId") int dishId){
+          @PathVariable("shoppingCartId") int shoppingCartId, @PathVariable("dishId") int dishId) {
     Optional<ShoppingCart> data = shoppingCartRepository.findById(shoppingCartId);
     Optional<Dish> dish = dishRepository.findById(dishId);
     List<ShoppingCartItem> allShoppingCartItems =
             (List<ShoppingCartItem>) shoppingCartItemRepository.findAll();
     boolean existed = false;
-    for(ShoppingCartItem item : allShoppingCartItems){
-      if(item.getDish().getId() == dishId && item.getCart().getId() == shoppingCartId){
+    for (ShoppingCartItem item : allShoppingCartItems) {
+      if (item.getDish().getId() == dishId && item.getCart().getId() == shoppingCartId) {
         existed = true;
       }
     }
-    if(existed){
+    if (existed) {
       return null;
-    }else{
-      if(!data.isPresent()){
+    } else {
+      if (!data.isPresent()) {
         ShoppingCart newShoppingCart = createShoppingCart(shoppingCartId);
         ShoppingCartItem newShoppingCartItem = getShoppingCartItem(dish, newShoppingCart);
         if (newShoppingCartItem != null) return newShoppingCartItem;
         return null;
-      }else{
+      } else {
         ShoppingCart existedShoppingCart = data.get();
         ShoppingCartItem newShoppingCartItem = getShoppingCartItem(dish, existedShoppingCart);
         if (newShoppingCartItem != null) return newShoppingCartItem;
@@ -74,12 +73,12 @@ public class ShoppingCartItemService {
 
   @GetMapping("/api/shoppingCart/{shoppingCartId}")
   public List<ShoppingCartItem> getAllItemsInCart(
-          @PathVariable("shoppingCartId") int shoppingCartId){
+          @PathVariable("shoppingCartId") int shoppingCartId) {
     List<ShoppingCartItem> allShoppingCartItems =
             (List<ShoppingCartItem>) shoppingCartItemRepository.findAll();
     List<ShoppingCartItem> resultShoppingCartItems = new ArrayList<>();
-    for(ShoppingCartItem result : allShoppingCartItems){
-      if(result.getCart().getId() == shoppingCartId){
+    for (ShoppingCartItem result : allShoppingCartItems) {
+      if (result.getCart().getId() == shoppingCartId) {
         resultShoppingCartItems.add(result);
       }
     }
@@ -90,9 +89,9 @@ public class ShoppingCartItemService {
   @PutMapping("/api/shoppingCartItem/{shoppingCartItemId}/{quantity}")
   public void updateItemQuantityPrice(
           @PathVariable("shoppingCartItemId") int shoppingCartItemId,
-          @PathVariable("quantity") int quantity){
+          @PathVariable("quantity") int quantity) {
     Optional<ShoppingCartItem> shoppingCartItem = shoppingCartItemRepository.findById(shoppingCartItemId);
-    if(shoppingCartItem.isPresent()){
+    if (shoppingCartItem.isPresent()) {
       ShoppingCartItem existedShoppingCartItem = shoppingCartItem.get();
       existedShoppingCartItem.setQuantity(quantity);
       existedShoppingCartItem.setItemPrice(quantity * existedShoppingCartItem.getDish().getPrice());
@@ -102,13 +101,13 @@ public class ShoppingCartItemService {
   }
 
   @DeleteMapping("/api/shoppingCartItem/{shoppingCartItemId}")
-  public void deleteItemById(@PathVariable("shoppingCartItemId") int shoppingCartItemId){
+  public void deleteItemById(@PathVariable("shoppingCartItemId") int shoppingCartItemId) {
     shoppingCartItemRepository.deleteById(shoppingCartItemId);
   }
 
 
   private ShoppingCartItem getShoppingCartItem(Optional<Dish> dish, ShoppingCart existedShoppingCart) {
-    if(dish.isPresent()){
+    if (dish.isPresent()) {
       ShoppingCartItem newShoppingCartItem = new ShoppingCartItem();
       newShoppingCartItem.setCart(existedShoppingCart);
       newShoppingCartItem.setDish(dish.get());

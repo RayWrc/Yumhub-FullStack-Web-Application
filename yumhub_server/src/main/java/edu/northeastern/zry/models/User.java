@@ -2,7 +2,6 @@ package edu.northeastern.zry.models;
 
 import java.util.Date;
 
-import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -136,11 +135,11 @@ public class User {
     return this.userType;
   }
 
-  public void setCarPlate(String carPlate){
+  public void setCarPlate(String carPlate) {
 
   }
 
-  public String getCarPlate(){
+  public String getCarPlate() {
     return null;
   }
 

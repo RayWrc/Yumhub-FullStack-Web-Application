@@ -2,7 +2,8 @@ import * as constants from "../Constants/Users";
 
 let _singleton = Symbol();
 
-const localURL = 'http://localhost:8080';
+//const localURL = 'http://localhost:8080';
+const localURL = 'http://yumhub-server.us-east-1.elasticbeanstalk.com';
 const currentUserURL = '/api/currentUser';
 const currentUserLogOutURL = '/api/currentUser/logOut';
 const customerLoginURL = '/api/customer/login';
@@ -306,7 +307,7 @@ class UserService {
             });
     }
 
-    adminUpdateUser(user){
+    adminUpdateUser(user) {
         return fetch(localURL + adminUpdateUserURL,
             {
                 credentials: 'include',
@@ -327,7 +328,7 @@ class UserService {
         });
     }
 
-    adminUpdateDeliverer(user){
+    adminUpdateDeliverer(user) {
         return fetch(localURL + adminUpdateDelivererURL,
             {
                 credentials: 'include',
@@ -348,7 +349,7 @@ class UserService {
         });
     }
 
-    adminCreateUser(user){
+    adminCreateUser(user) {
         let promise = fetch(localURL + adminCreateUserURL,
             {
                 credentials: 'include',
@@ -369,7 +370,6 @@ class UserService {
             });
         })
     }
-
 
 }
 

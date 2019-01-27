@@ -10,11 +10,11 @@ class MenuItem extends React.Component {
         }
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.setState({
-            description: this.props.description,
-            name: this.props.name,
-            price: this.props.price
+                          description: this.props.description,
+                          name: this.props.name,
+                          price: this.props.price
                       })
     }
 

@@ -31,7 +31,7 @@ class OwnerRestaurantPreview extends React.Component {
                         return this.setState({
                                                  restaurant: res
                                              }, () => {
-                            if(this.state.restaurant !== null){
+                            if (this.state.restaurant !== null) {
                                 this.searchRestaurantService.findRestaurantMenuById(
                                     this.state.restaurant.id)
                                     .then((menu) => {

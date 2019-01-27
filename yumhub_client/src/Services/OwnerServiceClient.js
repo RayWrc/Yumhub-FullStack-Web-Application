@@ -1,6 +1,7 @@
 let _singleton = Symbol();
 
-const localURL = 'http://localhost:8080';
+//const localURL = 'http://localhost:8080';
+const localURL = 'http://yumhub-server.us-east-1.elasticbeanstalk.com/';
 const createRestaurantForOwnerURL = '/api/restaurant/owner/ownerId';
 const findRestaurantForOwnerURL = '/api/restaurant/owner/ownerId';
 const restaurantInfoUpdateURL = '/api/restaurant/info/update';
@@ -32,7 +33,7 @@ class OwnerService {
         return this[_singleton]
     }
 
-    createRestaurant(restaurant, ownerId){
+    createRestaurant(restaurant, ownerId) {
         let promise = fetch(localURL + createRestaurantForOwnerURL.replace('ownerId', ownerId),
             {
                 method: 'post',
@@ -53,7 +54,7 @@ class OwnerService {
         })
     }
 
-    findRestaurantForOwner(ownerId){
+    findRestaurantForOwner(ownerId) {
         return fetch(localURL + findRestaurantForOwnerURL.replace('ownerId', ownerId))
             .then(function (response) {
                 return response.text().then(function (value2) {
@@ -66,7 +67,7 @@ class OwnerService {
             });
     }
 
-    restaurantInfoUpdate(restaurant){
+    restaurantInfoUpdate(restaurant) {
         return fetch(localURL + restaurantInfoUpdateURL,
             {
                 method: 'put',
@@ -87,7 +88,7 @@ class OwnerService {
 
     }
 
-    addDishForRestaurant(dish, resId){
+    addDishForRestaurant(dish, resId) {
         let promise = fetch(localURL + addDishToRestaurantURL.replace('resId', resId),
             {
                 method: 'post',
@@ -109,7 +110,7 @@ class OwnerService {
 
     }
 
-    deleteDishForRestaurant(dishId){
+    deleteDishForRestaurant(dishId) {
         return fetch(localURL + deleteDishForRestaurantURL.replace('dishId', dishId),
             {
                 method: 'delete'
@@ -117,7 +118,7 @@ class OwnerService {
 
     }
 
-    updateDish(dish, dishId){
+    updateDish(dish, dishId) {
         return fetch(localURL + updateDishURL.replace('dishId', dishId),
             {
                 method: 'put',
@@ -137,7 +138,7 @@ class OwnerService {
         });
     }
 
-    addPicLinkForRestaurant(pic, resId){
+    addPicLinkForRestaurant(pic, resId) {
         let promise = fetch(localURL + addLinkToResURL.replace('resId', resId),
             {
                 method: 'post',
@@ -159,7 +160,7 @@ class OwnerService {
 
     }
 
-    updateDescriptionPic(pic, picId){
+    updateDescriptionPic(pic, picId) {
         return fetch(localURL + updatePicLinkURL.replace('linkId', picId),
             {
                 method: 'put',
@@ -179,7 +180,7 @@ class OwnerService {
         });
     }
 
-    deletePicForRestaurant(picId){
+    deletePicForRestaurant(picId) {
         return fetch(localURL + deletePicLinkURL.replace('linkId', picId),
             {
                 method: 'delete'
@@ -187,7 +188,7 @@ class OwnerService {
 
     }
 
-    findAllPics(resId){
+    findAllPics(resId) {
         return fetch(localURL + findPicsForResURL.replace('resId', resId))
             .then(function (response) {
                 return response.text().then(function (value2) {
@@ -200,7 +201,7 @@ class OwnerService {
             });
     }
 
-    acceptOrder(orderId){
+    acceptOrder(orderId) {
         return fetch(localURL + acceptOrderURL.replace('orderId', orderId),
             {
                 method: 'put',
@@ -220,7 +221,7 @@ class OwnerService {
 
     }
 
-    chooseDeliverer(delivererId, orderId){
+    chooseDeliverer(delivererId, orderId) {
         return fetch(localURL + assignDelivererOrderURL
             .replace('orderId', orderId).replace('delivererId', delivererId),
             {
@@ -239,11 +240,10 @@ class OwnerService {
 
         });
 
-
     }
 
-    writeReplyForReview(reply, reviewId){
-        let promise = fetch(localURL + writeReplyReviewURL .replace('reviewId', reviewId),
+    writeReplyForReview(reply, reviewId) {
+        let promise = fetch(localURL + writeReplyReviewURL.replace('reviewId', reviewId),
             {
                 method: 'post',
                 body: reply,
@@ -263,8 +263,8 @@ class OwnerService {
         })
     }
 
-    updateReplyForReview(reply, reviewId){
-        let promise = fetch(localURL + updateReplyReviewURL .replace('reviewId', reviewId),
+    updateReplyForReview(reply, reviewId) {
+        let promise = fetch(localURL + updateReplyReviewURL.replace('reviewId', reviewId),
             {
                 method: 'put',
                 body: reply,

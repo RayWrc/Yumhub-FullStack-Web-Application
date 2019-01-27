@@ -28,7 +28,8 @@ import edu.northeastern.zry.repositories.ShoppingCartRepository;
 import edu.northeastern.zry.repositories.UserRepository;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
+//@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
+@CrossOrigin(origins = "http://yumhub-client.s3-website-us-east-1.amazonaws.com", allowCredentials = "true")
 public class UserService {
 
   @Autowired
@@ -228,7 +229,7 @@ public class UserService {
   }
 
   @PostMapping("/api/admin/create/user")
-  public User adminCreateUser(@RequestBody User user){
+  public User adminCreateUser(@RequestBody User user) {
     switch (user.getUserType()) {
       case "CUSTOMER_USER":
         Customer customer = new Customer();
@@ -288,7 +289,6 @@ public class UserService {
   }
 
 
-
   @PutMapping("/api/admin/deliverer/update")
   public Deliverer adminUpdateDeliverer(@RequestBody Deliverer deliverer) {
     Optional<Deliverer> data = delivererRepository.findById(deliverer.getId());
@@ -327,7 +327,7 @@ public class UserService {
   }
 
   @DeleteMapping("/api/user/delete/{userId}")
-  public void deleteUserById(@PathVariable("userId") int userId){
+  public void deleteUserById(@PathVariable("userId") int userId) {
     repository.deleteById(userId);
   }
 

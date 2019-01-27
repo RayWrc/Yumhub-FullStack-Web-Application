@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import RestaurantService from "../../../Services/SearchRestaurantServiceClient";
-import * as constants from "../../../Constants/Users"
 import OneRestaurant from "./OneRestaurant";
 
 class AllRestaurants extends Component {
@@ -47,9 +46,10 @@ class AllRestaurants extends Component {
         let restaurant = {
             name: this.state.name
         };
-        this.restaurantService.createRestaurantForOwner(restaurant, this.state.username).then(() => {
-            this.findAllRestaurants();
-        })
+        this.restaurantService.createRestaurantForOwner(restaurant, this.state.username)
+            .then(() => {
+                this.findAllRestaurants();
+            })
     }
 
     render() {

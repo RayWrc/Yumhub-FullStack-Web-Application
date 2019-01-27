@@ -40,7 +40,7 @@ class CustomerOrderItem extends React.Component {
         return totalPrice;
     }
 
-    writeReview(){
+    writeReview() {
         let review = {
             restaurantRating: this.state.restaurantRating,
             delivererRating: this.state.delivererRating,
@@ -50,7 +50,7 @@ class CustomerOrderItem extends React.Component {
         this.props.writeReview(review, this.props.orderId);
     }
 
-    updateReview(){
+    updateReview() {
         let review = {
             restaurantRating: this.state.restaurantRating,
             delivererRating: this.state.delivererRating,
@@ -97,40 +97,40 @@ class CustomerOrderItem extends React.Component {
                 </p>
                 {this.props.orderReview === null && this.props.orderStatus === "DELIVERED" &&
                  <div>
-                 <p className="mb-1">
-                     Restaurant Rating:
-                     <select onChange={(event) => {
-                         this.setState({restaurantRating: Number(event.target.value)})
-                     }}
-                             id="userType" className="form-control">
-                         <option value={5}>5: Very Good!</option>
-                         <option value={4}>4: Good</option>
-                         <option value={3}>3: Fair</option>
-                         <option value={2}>2: Bad</option>
-                         <option value={1}>1: Very Bad</option>
-                     </select>
-                 </p>
-                 <p className="mb-1">
-                    Deliverer Rating:
-                    <select onChange={(event) => {
-                    this.setState({delivererRating: Number(event.target.value)})
-                }}
-                    id="userType" className="form-control">
-                    <option value={5}>5: Very Good!</option>
-                    <option value={4}>4: Good</option>
-                    <option value={3}>3: Fair</option>
-                    <option value={2}>2: Bad</option>
-                    <option value={1}>1: Very Bad</option>
-                    </select>
-                    </p>
+                     <p className="mb-1">
+                         Restaurant Rating:
+                         <select onChange={(event) => {
+                             this.setState({restaurantRating: Number(event.target.value)})
+                         }}
+                                 id="userType" className="form-control">
+                             <option value={5}>5: Very Good!</option>
+                             <option value={4}>4: Good</option>
+                             <option value={3}>3: Fair</option>
+                             <option value={2}>2: Bad</option>
+                             <option value={1}>1: Very Bad</option>
+                         </select>
+                     </p>
+                     <p className="mb-1">
+                         Deliverer Rating:
+                         <select onChange={(event) => {
+                             this.setState({delivererRating: Number(event.target.value)})
+                         }}
+                                 id="userType" className="form-control">
+                             <option value={5}>5: Very Good!</option>
+                             <option value={4}>4: Good</option>
+                             <option value={3}>3: Fair</option>
+                             <option value={2}>2: Bad</option>
+                             <option value={1}>1: Very Bad</option>
+                         </select>
+                     </p>
                      <p className="mb-1">
                          Comment on this order:
-                             <input onChange={(event) => {
-                                 this.setState({
-                                                   text: event.target.value
+                         <input onChange={(event) => {
+                             this.setState({
+                                               text: event.target.value
 
-                                               })
-                             }} type="text" className="form-control"/>
+                                           })
+                         }} type="text" className="form-control"/>
                      </p>
                      <button onClick={() => {
                          this.writeReview()
@@ -147,7 +147,8 @@ class CustomerOrderItem extends React.Component {
                          <select onChange={(event) => {
                              this.setState({restaurantRating: Number(event.target.value)})
                          }}
-                                 id="userType" className="form-control" defaultValue={this.props.orderReview.restaurantRating.toString()}>
+                                 id="userType" className="form-control"
+                                 defaultValue={this.props.orderReview.restaurantRating.toString()}>
                              <option value={5}>5: Very Good!</option>
                              <option value={4}>4: Good</option>
                              <option value={3}>3: Fair</option>
@@ -160,7 +161,8 @@ class CustomerOrderItem extends React.Component {
                          <select onChange={(event) => {
                              this.setState({delivererRating: Number(event.target.value)})
                          }}
-                                 id="userType" className="form-control" defaultValue={this.props.orderReview.delivererRating.toString()}>
+                                 id="userType" className="form-control"
+                                 defaultValue={this.props.orderReview.delivererRating.toString()}>
                              <option value={5}>5: Very Good!</option>
                              <option value={4}>4: Good</option>
                              <option value={3}>3: Fair</option>

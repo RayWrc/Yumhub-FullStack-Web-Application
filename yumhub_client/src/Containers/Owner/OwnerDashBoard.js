@@ -19,11 +19,11 @@ class OwnerDashBoard extends Component {
         };
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.props.findUser();
     }
 
-    logOut(){
+    logOut() {
         this.props.logOut();
         this.props.history.push('/');
     }

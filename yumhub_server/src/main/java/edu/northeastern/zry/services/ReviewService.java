@@ -20,8 +20,6 @@ import edu.northeastern.zry.repositories.RestaurantRepository;
 import edu.northeastern.zry.repositories.ReviewRepository;
 
 
-
-
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class ReviewService {
@@ -40,9 +38,9 @@ public class ReviewService {
 
   @PostMapping("/api/order/review/{orderId}")
   public Review writeReviewForOrder(@PathVariable("orderId") int orderId,
-                                    @RequestBody Review review){
+                                    @RequestBody Review review) {
     Optional<Order> data = orderRepository.findById(orderId);
-    if(data.isPresent()){
+    if (data.isPresent()) {
       Order order = data.get();
       Review newReview = new Review();
       newReview.setDelivererRating(review.getDelivererRating());
@@ -67,14 +65,14 @@ public class ReviewService {
       delivererRepository.save(deliverer);
 
       return reviewRepository.save(newReview);
-    }else {
+    } else {
       return null;
     }
 
   }
 
   @PostMapping("/api/review/{reviewId}/reply")
-  public Review writeReplyReview(@PathVariable("reviewId") int reviewId, @RequestBody String reply){
+  public Review writeReplyReview(@PathVariable("reviewId") int reviewId, @RequestBody String reply) {
 
     Optional<Review> data = reviewRepository.findById(reviewId);
     return getReview(reply, data);
@@ -82,9 +80,9 @@ public class ReviewService {
 
   @PutMapping("/api/order/review/{orderId}")
   public Review updateReviewForOrder(@PathVariable("orderId") int orderId,
-                                    @RequestBody Review review){
+                                     @RequestBody Review review) {
     Optional<Order> data = orderRepository.findById(orderId);
-    if(data.isPresent()){
+    if (data.isPresent()) {
       Order order = data.get();
       Review existedReview = order.getReview();
       existedReview.setText(review.getText());
@@ -106,29 +104,29 @@ public class ReviewService {
       delivererRepository.save(deliverer);
 
       return reviewRepository.save(existedReview);
-    }else {
+    } else {
       return null;
     }
 
   }
 
   @PutMapping("/api/review/{reviewId}/reply")
-  public Review updateReplyReview(@PathVariable("reviewId") int reviewId, @RequestBody String reply){
+  public Review updateReplyReview(@PathVariable("reviewId") int reviewId, @RequestBody String reply) {
     Optional<Review> data = reviewRepository.findById(reviewId);
     return getReview(reply, data);
   }
 
   private Review getReview(@RequestBody String reply, Optional<Review> data) {
-    if(data.isPresent()){
+    if (data.isPresent()) {
       Review existedReview = data.get();
       existedReview.setReply(reply);
       return reviewRepository.save(existedReview);
-    }else{
+    } else {
       return null;
     }
   }
 
-  private double round(double num){
+  private double round(double num) {
     num = num * 100;
     num = Math.round(num);
     return num / 100;

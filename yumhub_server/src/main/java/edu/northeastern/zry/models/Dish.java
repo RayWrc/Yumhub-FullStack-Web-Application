@@ -1,9 +1,11 @@
 package edu.northeastern.zry.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -12,116 +14,108 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import java.util.Comparator;
-
 @Entity
 public class Dish {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-	private  String name;
-	private String description;
-	private Double price;
-	
-
-	
-	@ManyToOne
-	@JsonIgnore
-	private Restaurant restaurant;
-	
-	
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private int id;
+  private String name;
+  private String description;
+  private Double price;
 
 
-	// one to many relation with item
-	@OneToMany(mappedBy = "dish", fetch = FetchType.LAZY)
-	@JsonIgnore
-	private List<Item> dishItem = new ArrayList<>();
-	
-	
-	
-	
-	public Dish() {
-		
-	}
-	
-	
-	public Dish(String name, String des, Double price, int available) {
-		this.name = name;
-		this.description = des;
-		this.price = price;
-			}
+  @ManyToOne
+  @JsonIgnore
+  private Restaurant restaurant;
 
 
-	public int getId() {
-		return id;
-	}
+  // one to many relation with item
+  @OneToMany(mappedBy = "dish", fetch = FetchType.LAZY)
+  @JsonIgnore
+  private List<Item> dishItem = new ArrayList<>();
 
 
-	public void setId(int id) {
-		this.id = id;
-	}
+  public Dish() {
+
+  }
 
 
-	public String getName() {
-		return name;
-	}
+  public Dish(String name, String des, Double price, int available) {
+    this.name = name;
+    this.description = des;
+    this.price = price;
+  }
 
 
-	public void setName(String name) {
-		this.name = name;
-	}
+  public int getId() {
+    return id;
+  }
 
 
-	public String getDescription() {
-		return description;
-	}
+  public void setId(int id) {
+    this.id = id;
+  }
 
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+  public String getName() {
+    return name;
+  }
 
 
-	public Double getPrice() {
-		return price;
-	}
+  public void setName(String name) {
+    this.name = name;
+  }
 
 
-	public void setPrice(Double price) {
-		this.price = price;
-	}
+  public String getDescription() {
+    return description;
+  }
 
 
-	public List<Item> getDishItem() {
-		return dishItem;
-	}
+  public void setDescription(String description) {
+    this.description = description;
+  }
 
 
-	public void setDishItem(List<Item> dishItem) {
-		this.dishItem = dishItem;
-	}
-	
-	
-	public Restaurant getRestaurant() {
-		return restaurant;
-	}
+  public Double getPrice() {
+    return price;
+  }
 
 
-	public void setRestaurant(Restaurant restaurant) {
-		this.restaurant = restaurant;
-	}
+  public void setPrice(Double price) {
+    this.price = price;
+  }
+
+
+  public List<Item> getDishItem() {
+    return dishItem;
+  }
+
+
+  public void setDishItem(List<Item> dishItem) {
+    this.dishItem = dishItem;
+  }
+
+
+  public Restaurant getRestaurant() {
+    return restaurant;
+  }
+
+
+  public void setRestaurant(Restaurant restaurant) {
+    this.restaurant = restaurant;
+  }
 
   // sort dish by name
-	public static Comparator<Dish> DishNameComparator = new Comparator<Dish>() {
-		public int compare(Dish d1, Dish d2) {
-			String name1 = d1.getName().toUpperCase();
-			String name2 =d2.getName().toUpperCase();
-			
-			return name1.compareTo(name2);
-		}
-	};
-	
-	
+  public static Comparator<Dish> DishNameComparator = new Comparator<Dish>() {
+    public int compare(Dish d1, Dish d2) {
+      String name1 = d1.getName().toUpperCase();
+      String name2 = d2.getName().toUpperCase();
+
+      return name1.compareTo(name2);
+    }
+  };
+
+
 }

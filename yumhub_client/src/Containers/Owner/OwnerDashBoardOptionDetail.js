@@ -32,13 +32,13 @@ class OwnerDashBoardOptionDetail extends Component {
                 {this.state.option === "recentOrders" &&
                  <OwnerRecentOrders/>}
                 {this.state.option === "restaurantBasicInfo" &&
-                <OwnerRestaurantBasicInfo/>}
+                 <OwnerRestaurantBasicInfo/>}
                 {this.state.option === "menu" &&
-                <OwnerRestaurantMenu/>}
+                 <OwnerRestaurantMenu/>}
                 {this.state.option === "descriptionPictures" &&
                  <RestaurantDescriptionPictures/>}
                 {this.state.option === "preview" &&
-                <OwnerRestaurantPreview/>}
+                 <OwnerRestaurantPreview/>}
             </div>
 
         )

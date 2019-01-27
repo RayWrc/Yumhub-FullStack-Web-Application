@@ -30,10 +30,10 @@ import okhttp3.Response;
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class YelpAPIService {
 
-	@Autowired
+  @Autowired
   RestaurantRepository restaurantRepository;
 
-	@Autowired
+  @Autowired
   DescriptionPictureRepository descriptionPictureRepository;
 
   private String accessKey = "jxRTE_Dpy5iu5KA00c1iApZngA91VX1CcPW86PIdoo6yInYk-rzoZ0YWYAAx2chyVGgvf4M98eGJNwdfFd4D4ziOB20sLyIQkHEWxXwGdhPBAOSZ62kBRWKCYdwDXHYx";
@@ -69,18 +69,21 @@ public class YelpAPIService {
             .addHeader("authorization", "Bearer" + " " + accessKey).build();
     Response response = client.newCall(request).execute();
     JSONObject jsonObject = new JSONObject(Objects.requireNonNull(response.body()).string().trim());
-    Restaurant rawData =  jsonToRestaurant(jsonObject);
+    Restaurant rawData = jsonToRestaurant(jsonObject);
     Optional<Restaurant> data = restaurantRepository.findRestaurantByYelpId(rawData.getYelpId());
-    if(data.isPresent()){
+    if (data.isPresent()) {
+      // Add description pictures to the existed restaurant
       Restaurant existedRestaurant = data.get();
-      for(DescriptionPicture picture:rawData.getDescriptionPictures()){
+
+      for (DescriptionPicture picture : rawData.getDescriptionPictures()) {
         DescriptionPicture newPicture = new DescriptionPicture();
         newPicture.setLink(picture.getLink());
         newPicture.setRestaurantPicture(existedRestaurant);
         descriptionPictureRepository.save(newPicture);
+        existedRestaurant.addDescriptionPicture(newPicture);
       }
       return restaurantRepository.save(existedRestaurant);
-    }else{
+    } else {
       return null;
     }
   }

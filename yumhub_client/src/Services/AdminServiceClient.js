@@ -1,6 +1,7 @@
 let _singleton = Symbol();
 
-const localURL = 'http://localhost:8080';
+//const localURL = 'http://localhost:8080';
+const localURL = 'http://yumhub-server.us-east-1.elasticbeanstalk.com/';
 const findAllOrdersURL = '/api/admin/orders';
 const deleteOrderByIdURL = '/api/admin/order/orderId';
 const updateOrderByIdURL = '/api/admin/order/orderId/status/note';
@@ -19,7 +20,6 @@ class AdminService {
         return this[_singleton]
     }
 
-
     findAllOrders() {
         return fetch(localURL + findAllOrdersURL)
             .then(function (response) {
@@ -27,16 +27,16 @@ class AdminService {
             });
     }
 
-    deleteOrderById(orderId){
+    deleteOrderById(orderId) {
         return fetch(localURL + deleteOrderByIdURL.replace('orderId', orderId),
             {
                 method: 'delete'
             })
     }
 
-    adminUpdateOrder(order, orderId, orderStatus){
-        return fetch(localURL + updateOrderByIdURL.replace('orderId', orderId).
-        replace('status', orderStatus).replace('note', order),
+    adminUpdateOrder(order, orderId, orderStatus) {
+        return fetch(localURL + updateOrderByIdURL.replace('orderId', orderId)
+            .replace('status', orderStatus).replace('note', order),
             {
                 method: 'put',
                 body: JSON.stringify(orderId),

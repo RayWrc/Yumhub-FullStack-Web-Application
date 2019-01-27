@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import * as constants from "../../Constants/Users";
 import UserService from '../../Services/UserServiceClient';
 import {connect} from "react-redux";
 import * as actions from "../../Actions/UserAction";
