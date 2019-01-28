@@ -1,7 +1,7 @@
 let _singleton = Symbol();
 
 //const localURL = 'http://localhost:8080';
-const localURL = 'http://yumhub-server.us-east-1.elasticbeanstalk.com/';
+const localURL = 'http://yumhub-server.us-east-1.elasticbeanstalk.com';
 const createRestaurantForOwnerURL = '/api/restaurant/owner/ownerId';
 const findRestaurantForOwnerURL = '/api/restaurant/owner/ownerId';
 const restaurantInfoUpdateURL = '/api/restaurant/info/update';

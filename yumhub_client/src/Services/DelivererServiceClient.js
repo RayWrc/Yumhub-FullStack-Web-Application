@@ -1,7 +1,7 @@
 let _singleton = Symbol();
 
 //const localURL = 'http://localhost:8080';
-const localURL = 'http://yumhub-server.us-east-1.elasticbeanstalk.com/';
+const localURL = 'http://yumhub-server.us-east-1.elasticbeanstalk.com';
 const allOrdersForDelivererURL = '/api/deliverer/dId/order';
 const confirmURL = '/api/deliverer/dId/order/orderId/confirm';
 

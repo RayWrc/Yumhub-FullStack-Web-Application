@@ -106,6 +106,7 @@ public class RestaurantService {
     } else {
       Owner owner = new Owner();
       owner.setUsername(ownerName);
+      owner.setPassword(ownerName);
       Owner existedOwner = ownerRepo.save(owner);
       restaurant.setOwner(existedOwner);
       return restaurantRepository.save(restaurant);
